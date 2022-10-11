@@ -1,0 +1,46 @@
+[mysqld]
+#Tuning
+thread_stack            = 512K
+thread_cache_size	    = 32
+#table_cache             = 60000
+net_buffer_length       = 32
+
+query_cache_limit       = 2M
+query_cache_size        = 256M
+
+myisam_sort_buffer_size = 256M
+tmp_table_size          = 256M
+max_heap_table_size     = 128M
+
+read_buffer_size        = 2M
+read_rnd_buffer_size    = 4M
+
+sort_buffer_size        = 2M
+join_buffer_size        = 4M
+
+max_allowed_packet	    = 256M
+max_sort_length         = 512
+max_connections         = 120
+max_connect_errors      = 50
+max_user_connections    = 25
+
+
+#general_log_file               = /var/log/mysql/mysql.log
+#general_log                    = 1
+
+#log_slow_queries	            = /var/log/mysql/mysql-slow.log
+#long_query_time = 1
+
+#server-id		                = 1
+#log_bin			            = /var/log/mysql/mysql-bin.log
+expire_logs_days	            = 10
+#max_binlog_size                 = 300M
+innodb_buffer_pool_size         = 1G
+innodb_lock_wait_timeout        = 50
+innodb_log_buffer_size          = 8M
+innodb_flush_log_at_trx_commit  = 0
+innodb_flush_method             = O_DIRECT
+transaction-isolation           = READ-COMMITTED
+innodb_flush_neighbors          = 0
+bulk_insert_buffer_size         = 256M
+innodb_adaptive_hash_index      = 0

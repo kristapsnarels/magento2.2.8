@@ -1,0 +1,64 @@
+services:
+  nginx:
+    image: nginx:1.8
+    ports:
+      - '80:80'
+    volumes:
+      - ./${CONVERT_PROJECT_NAME}:/var/www/
+      - ./docker/nginx/config/:/etc/nginx/conf.d
+      - ./docker/nginx/logs:/var/log/nginx
+      - ./docker/profiler/:/var/profiler
+      - ~/.ssh:/root/.ssh:ro
+    links:
+      - php
+    networks:
+      - net
+  php:
+    build: ./config/php
+    volumes:
+      - ./${CONVERT_PROJECT_NAME}:/var/www/
+      - ./docker/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+      - ./docker/profiler/:/var/profiler
+      - ~/.ssh:/root/.ssh:ro
+    links:
+      - mysql
+      - redis
+      - mailhog
+      - rabbitmq
+    env_file:
+      - .env
+    networks:
+      - net
+  mysql:
+    platform: linux/x86_64
+    image: mysql:5.7
+    volumes:
+      - ./${CONVERT_PROJECT_NAME}:/var/www/
+      - ./docker/mysql:/var/lib/mysql/
+      - ./docker/mysql/conf.cnf:/etc/mysql/conf.d/conf.cnf
+    ports:
+      - 3306:3306
+    env_file:
+      - .env
+    networks:
+      - net
+  redis:
+    image: redis:alpine
+    ports:
+      - 6379:6379
+    networks:
+      - net
+  mailhog:
+    image: mailhog/mailhog:latest
+    ports:
+      - '1025:1025'
+    networks:
+      - net
+  rabbitmq:
+    image: rabbitmq:management-alpine
+    ports:
+      - '5672:5672'
+    networks:
+      - net
+networks:
+  net:
