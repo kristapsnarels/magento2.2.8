@@ -1,11 +1,11 @@
 services:
   nginx:
-    image: nginx:1.8
+    image: arm64v8/nginx:latest
     ports:
       - '80:80'
     volumes:
       - ./${CONVERT_PROJECT_NAME}:/var/www/
-      - ./docker/nginx/config/:/etc/nginx/conf.d
+      - ./docker/nginx/sites-enabled/:/etc/nginx/conf.d
       - ./docker/nginx/logs:/var/log/nginx
       - ./docker/profiler/:/var/profiler
       - ~/.ssh:/root/.ssh:ro
@@ -14,7 +14,7 @@ services:
     networks:
       - net
   php:
-    build: ./config/php
+    build: ./docker/php
     volumes:
       - ./${CONVERT_PROJECT_NAME}:/var/www/
       - ./docker/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
@@ -34,8 +34,8 @@ services:
     image: mysql:5.7
     volumes:
       - ./${CONVERT_PROJECT_NAME}:/var/www/
-      - ./docker/mysql:/var/lib/mysql/
-      - ./docker/mysql/conf.cnf:/etc/mysql/conf.d/conf.cnf
+      - ./docker/mysql/data:/var/lib/mysql/
+      - ./docker/mysql/config/conf.cnf:/etc/mysql/conf.d/conf.cnf
     ports:
       - 3306:3306
     env_file:
@@ -43,7 +43,7 @@ services:
     networks:
       - net
   redis:
-    image: redis:alpine
+    image: redis:latest
     ports:
       - 6379:6379
     networks:
@@ -55,10 +55,14 @@ services:
     networks:
       - net
   rabbitmq:
-    image: rabbitmq:management-alpine
+    image: rabbitmq:latest
     ports:
       - '5672:5672'
     networks:
       - net
+  node_js:
+    build: ./docker/node_js
+    volumes:
+      - ./${CONVERT_PROJECT_NAME}:/var/www/
 networks:
   net:
