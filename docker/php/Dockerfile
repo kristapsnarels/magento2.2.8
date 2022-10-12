@@ -1,4 +1,4 @@
-FROM arm64v8/php:7.2-fpm
+FROM arm64v8/php:7.1-fpm
 
 # Install dependencies
 RUN apt-get update \
