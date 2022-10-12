@@ -14,6 +14,12 @@ RUN apt-get update \
   ca-certificates \
   lsb-release \
   software-properties-common \
+  zlib1g-dev \
+  g++ \
+  libxml2 \
+  libxml2-dev \
+  mcrypt \
+  libmcrypt-dev \
   libbz2-dev \
   libjpeg62-turbo-dev \
   libpng-dev \

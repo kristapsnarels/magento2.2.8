@@ -14,8 +14,8 @@ To change the project:
 
 ## Setup
 1. Clone this repository
-2. Clone the Magento 2.2.8 project inside this repository
+2. Clone the Magento project inside this repository
 3. run: `docker compose up -d`
 4. Install Composer dependencies:
    1. `cd` to Magento 2.2.8 project root
-   2. run: `docker compose exec php composer install`
+   2. run: `docker compose exec php composer install --working-dir=/var/www/html/[project-name]`
