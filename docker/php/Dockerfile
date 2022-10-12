@@ -81,6 +81,7 @@ RUN docker-php-ext-install -j$(nproc) \
   sysvshm \
   tidy \
   mbstring \
+  mcrypt \
   xmlrpc \
   xsl \
   zip \
