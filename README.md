@@ -9,7 +9,7 @@
 
 ## Example project: [sportyme](https://convert.atlassian.net/wiki/spaces/DEVOPS/pages/85301190/sportyme.dev.convert.no+demo.convert.no)
 To change the project:
-1. update `config/nginx/project.conf`, reference: [convertteam/docker-magento2](https://bitbucket.org/convertteam/docker-magento2/src/danil-composer/docker_data/sites-enabled/)
+1. update `docker//nginx/config/default.conf`, reference: [convertteam/docker-magento2](https://bitbucket.org/convertteam/docker-magento2/src/danil-composer/docker_data/sites-enabled/)
 2. update `CONVERT_PROJECT_NAME` in `.env` file
 
 ## Setup
