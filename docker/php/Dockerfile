@@ -44,6 +44,7 @@ RUN apt-get update \
   libyaml-dev \
   libzip-dev \
   zip \
+  openssh-client \
   && rm -rf /var/lib/apt/lists/*
 
 # Configure the gd library
