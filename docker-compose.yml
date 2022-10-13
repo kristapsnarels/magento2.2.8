@@ -24,6 +24,7 @@ services:
       - ./docker/php/config/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
       - ./docker/profiler/:/var/profiler
       - ~/.ssh:/root/.ssh:ro
+    working_dir: /var/www/html/${CONVERT_PROJECT_NAME}
     env_file:
       - .env
     networks:
@@ -44,14 +45,14 @@ services:
       - internal
   redis:
     container_name: redis
-    image: redis:latest
+    image: arm64v8/redis:latest
     ports:
       - '6379:6379'
     networks:
       - internal
   rabbitmq:
     container_name: rabbitmq
-    image: rabbitmq:latest
+    image: arm64v8/rabbitmq:latest
     ports:
       - '5672:5672'
     networks:
@@ -60,8 +61,6 @@ services:
     build: ./docker/node_js
     volumes:
       - ./${CONVERT_PROJECT_NAME}:/var/www/html/${CONVERT_PROJECT_NAME}
-    networks:
-      - internal
 networks:
   internal:
     driver: bridge
